@@ -68,6 +68,8 @@ public class BikersPortal {
     	viewAllAppointment(appointmentList);
     }
     else if (option == 2) {
+    	Appointment newAppointment = inputAppointment();
+        addAppointment(appointmentList, newAppointment);
     	
     }
 //	//student 5
