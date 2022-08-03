@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 
 public class BikersPortal {
-	     ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
+	    ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
 	    ArrayList<Bike> bikeList = new ArrayList<Bike>();
 	    ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
 	    ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 	    ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
+	    
+//	    buyerList.add(new Buyer(""));
+	  
+	    
 	    
 	
 
