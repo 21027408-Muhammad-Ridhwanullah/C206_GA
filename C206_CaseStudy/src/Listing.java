@@ -4,7 +4,7 @@ public class Listing {
 	private String id;
 	private String name;
 	private double price;
-	private boolean isAvailable;
+	private boolean isAvailable = true;
 	
 	public Listing(String id, String name, double price, boolean isAvailable) {
 		this.id = id;
@@ -31,8 +31,9 @@ public class Listing {
 		return name;
 	}
 	
-	
-	
-	
+	public String showListing() {
+		String output = String.format("%-10s %-20s $%-10.2f %-15b", id, name, price, isAvailable);
+		return output;
+	}
 
 }

@@ -2,12 +2,13 @@
 public class Buyer {
 	private String buyerID;
 	private String buyerName;
-	private int age;
+	private int mobile;
 	
-	public Buyer(String buyerID, String buyerName, int age) {
+	
+	public Buyer(String buyerID, String buyerName, int mobile) {
 		this.buyerID = buyerID;
 		this.buyerName = buyerName;
-		this.age = age;
+		this.mobile = mobile;
 	}
 	public String getBuyerName() {
 		return buyerName;
@@ -15,11 +16,12 @@ public class Buyer {
 	public void setBuyerName(String buyerName) {
 		this.buyerName = buyerName;
 	}
-	public int getAge() {
-		return age;
+	
+	public int getMobile() {
+		return mobile;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setMobile(int mobile) {
+		this.mobile = mobile;
 	}
 	public String getBuyerID() {
 		return buyerID;
