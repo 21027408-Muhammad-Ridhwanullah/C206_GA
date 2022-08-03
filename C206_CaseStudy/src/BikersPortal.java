@@ -7,7 +7,12 @@ public class BikersPortal {
 	    ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 	    ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 	    
-//	    buyerList.add(new Buyer(""));
+	    buyerList.add(new Buyer("B001", "Mary", "83214567"));
+	    buyerList.add(new Buyer("B002", "John", "98765432"));
+	    buyerList.add(new Buyer("B003", "Timmy", "83214567"));
+	    
+	    
+	    
 	  
 	    
 	    
@@ -51,21 +56,21 @@ public class BikersPortal {
 	//student 2
 	//student 3
 	//student 4
-//	System.out.println("1. View Appointments");
-//    System.out.println("2. Create Appointment");
-//    System.out.println("3. Update Appointment Information");
-//    System.out.println("4. Delete Appointment");
-//    System.out.println("5. Search Appointment by Date");
-//    System.out.println("6. Search Appointment by Buyer's ID");
-//    
-//    int option = Helper.readInt("Enter an option > ");
-//    
-//    if (option == 1) {
-//    	viewAllAppointment(appointmentList);
-//    }
-//    else if (option == 2) {
-//    	
-//    }
+	System.out.println("1. View Appointments");
+    System.out.println("2. Create Appointment");
+    System.out.println("3. Update Appointment Information");
+    System.out.println("4. Delete Appointment");
+    System.out.println("5. Search Appointment by Date");
+    System.out.println("6. Search Appointment by Buyer's ID");
+    
+    int option = Helper.readInt("Enter an option > ");
+    
+    if (option == 1) {
+    	viewAllAppointment(appointmentList);
+    }
+    else if (option == 2) {
+    	
+    }
 //	//student 5
 //	
 //
