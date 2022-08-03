@@ -73,18 +73,18 @@ public class BikersPortal {
     	Appointment newAppointment = newAppoint();
         addAppointment(appointmentList, newAppointment);
     }
-    else if (suboption == 3) {
+    else if (option == 3) {
         System.out.println("## Not Coded ##");
         //TODO
       }
-      else if (suboption == 4) {
+      else if (option == 4) {
         System.out.println("## Not Coded ##");
         //TODO
       }
-      else if (suboption == 5) {
+      else if (option == 5) {
         searchAppointmentByDate(appointmentList);
       }
-      else if (suboption == 6) {
+      else if (option == 6) {
         searchAppointmentByID(appointmentList);
       }
       else {
