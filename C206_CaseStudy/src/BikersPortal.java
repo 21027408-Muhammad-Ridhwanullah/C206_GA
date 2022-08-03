@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
 public class BikersPortal {
-	   
-	    
-	    
-	    
+	
+	private ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
+	private ArrayList<Bike> bikeList = new ArrayList<Bike>();
+	private ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
+	private ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+	private ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 	public static void main(String[] args) {
 		BikersPortal bp = new BikersPortal();
@@ -12,11 +14,6 @@ public class BikersPortal {
 
 	}
 	private void start() {
-		ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
-	    ArrayList<Bike> bikeList = new ArrayList<Bike>();
-	    ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
-	    ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
-	    ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 	    
 	    buyerList.add(new Buyer("B001", "Mary", 83214567));
 	    buyerList.add(new Buyer("B002", "John", 98765432));
