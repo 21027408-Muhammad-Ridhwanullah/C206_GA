@@ -3,8 +3,8 @@ public class Bike extends Listing{
 	private String colour;
 	private String bikeType;
 	
-	public Bike(String id, String name, double price, boolean isAvailable, String colour, String bikeType) {
-		super(id, name, price, isAvailable);
+	public Bike(String id, String name, double price, String colour, String bikeType) {
+		super(id, name, price);
 		this.colour = colour;
 		this.bikeType = bikeType;
 	}

@@ -3,10 +3,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BikersPortal {
-	   
-	    
-	    
-	    
+	
+	   private ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
+	   private ArrayList<Bike> bikeList = new ArrayList<Bike>();
+	   private ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
+	   private ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+	   private ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();   
 
 	public static void main(String[] args) {
 		BikersPortal bp = new BikersPortal();
@@ -24,13 +26,27 @@ public class BikersPortal {
 	    buyerList.add(new Buyer("B002", "John", 98765432));
 	    buyerList.add(new Buyer("B003", "Timmy", 83214567));
 	    
-	    bikeList.add(new Bike("B001", "Mountain bike", "200.50", "red", ""));
+	    bikeList.add(new Bike("B001", "Mountain bike", 200.50, "red", ""));
 		int option = 0;
+		int subOption = 0;
 		
 	while(option != 6) {
 		menu();
 		if(option == 1 ) {}
-		else if(option == 2) {}
+		else if(option == 2) {
+			bikeMenu();
+			if (subOption == 1) {
+				viewBike();
+			} else if (subOption == 2) {
+
+			} else if (subOption == 3) {
+
+			} else if (subOption == 4) {
+
+			} else {
+				System.out.println("Invalid Option");
+			}
+		}
 		else if(option == 3) {}
 		else if(option == 4) {}
 		else if(option == 5) {}
@@ -51,10 +67,27 @@ public class BikersPortal {
 		System.out.println("5. Feedback");
 		System.out.println("6. Quit");
 	}
-
 	
 	//Student 1
 	//student 2
+	private void bikeMenu() {
+		Helper.line(80, "=");
+		System.out.println("BIKE LISTING");
+		Helper.line(80, "=");
+		System.out.println("1. View bike listing");
+		System.out.println("2. Add bike listing");
+		System.out.println("3. Edit bike listing");
+		System.out.println("4. Edit bike listing");
+	}
+	private void viewBike() {
+		String output = String.format("%-10s %-20s %-10s %-15s", "ID", "NAME", "PRICE", "AVAILABLE", "COLOUR",
+				"BIKE TYPE");
+		for (Bike b : bikeList) {
+			output += b.getListing();
+		}
+		System.out.println(output);
+	}
+
 	//student 3
 	//student 4
 	System.out.println("1. View Appointments");

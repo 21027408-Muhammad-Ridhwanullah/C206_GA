@@ -4,13 +4,13 @@ public class Listing {
 	private String id;
 	private String name;
 	private double price;
-	private boolean isAvailable = true;
+	private boolean isAvailable;
 	
-	public Listing(String id, String name, double price, boolean isAvailable) {
+	public Listing(String id, String name, double price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.isAvailable = isAvailable;
+		this.isAvailable = true;
 	}
 	public boolean isAvailable() {
 		return isAvailable;
