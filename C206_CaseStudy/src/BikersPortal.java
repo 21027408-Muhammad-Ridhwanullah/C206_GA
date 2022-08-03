@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class BikersPortal {
@@ -49,7 +51,7 @@ public class BikersPortal {
 		System.out.println("5. Feedback");
 		System.out.println("6. Quit");
 	}
-}
+
 	
 	//Student 1
 	//student 2
@@ -68,10 +70,44 @@ public class BikersPortal {
     	viewAllAppointment(appointmentList);
     }
     else if (option == 2) {
-    	Appointment newAppointment = inputAppointment();
+    	Appointment newAppointment = newAppoint();
         addAppointment(appointmentList, newAppointment);
-    	
     }
+    else if (suboption == 3) {
+        System.out.println("## Not Coded ##");
+        //TODO
+      }
+      else if (suboption == 4) {
+        System.out.println("## Not Coded ##");
+        //TODO
+      }
+      else if (suboption == 5) {
+        searchAppointmentByDate(appointmentList);
+      }
+      else if (suboption == 6) {
+        searchAppointmentByID(appointmentList);
+      }
+      else {
+        System.out.println("Invalid input.");
+      }
+    }
+  //create appointment
+    public static Appointment newAppoint() {
+        String id = Helper.readString("Enter id > ");
+        String apptDate = Helper.readString("Enter appointment date (yyyy-MM-dd) > ");
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate apptDateLD = LocalDate.parse(apptDate, dtf);
+
+        Appointment newAppointment = new Appointment(id, apptDateLD);
+        return newAppointment;
+      }
+      
+      public static void addAppointment(ArrayList<Appointment> appointmentList, Appointment newAppointment) {
+        appointmentList.add(newAppointment);
+        System.out.println("New appointment has been successfully added.");
+      }
+      
 //	//student 5
 //	
 //
