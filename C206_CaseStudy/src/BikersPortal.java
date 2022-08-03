@@ -1,5 +1,13 @@
+import java.util.ArrayList;
 
 public class BikersPortal {
+	     ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
+	    ArrayList<Bike> bikeList = new ArrayList<Bike>();
+	    ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
+	    ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+	    ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
+	    
+	
 
 	public static void main(String[] args) {
 		BikersPortal bp = new BikersPortal();
@@ -26,7 +34,7 @@ public class BikersPortal {
 		System.out.println("BIKERS PORTAL");
 		Helper.line(80, "=");
 		
-		System.out.println("1. User");
+		System.out.println("1. Buyer");
 		System.out.println("2. Bike");
 		System.out.println("3. Bike Parts");
 		System.out.println("4. Appointment");
