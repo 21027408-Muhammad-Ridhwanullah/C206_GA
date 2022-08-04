@@ -40,6 +40,7 @@ public class BikersPortal {
 		
 	while(option != 6) {
 		menu();
+		option = Helper.readInt("Enter option > ");
 		//Buyer
 		if(option == 1 ) {
 			buyerMenu();
@@ -83,9 +84,9 @@ public class BikersPortal {
 			bikePMenu();
 			subOption = Helper.readInt("Enter option > ");
 			if (subOption == 1) {
-				viewBike(bikeList);
+				viewBikeParts(bikePartList);
 			} else if (subOption == 2) {
-				addBikePart();
+				addBikePart(bikePartList);
 			} else if (subOption == 3) {
 				deleteBikePart(bikePartList);
 			} else if (subOption == 4) {
@@ -166,8 +167,6 @@ public class BikersPortal {
 		    if(buyerList.get(e).getBuyerID().equals(deleteBuyer)) {
 		     buyerList.remove(e);
 		     System.out.println("User's account has been successfully deleted");
-		    }else{
-		     System.out.println("The deletion process has been cancelled");
 		    }
 		   }
 		  
@@ -196,7 +195,7 @@ public class BikersPortal {
 		System.out.println("4. Edit bike listing");
 	}
 	private void viewBike(ArrayList <Bike>bikeList) {
-		String output = String.format("%-10s %-20s %-10s %-15s", "ID", "NAME", "PRICE", "AVAILABLE", "COLOUR",
+		String output = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE", "COLOUR",
 				"BIKE TYPE");
 		for (Bike b : bikeList) {
 			output += b.getListing();
@@ -218,12 +217,17 @@ public class BikersPortal {
 	
 	private void delBike(ArrayList<Bike> bikeList) {
 		String idSearch = Helper.readString("Enter id to delete > ");
+		boolean del = false;
 		for(Bike b: bikeList) {
 			if(b.getId().equalsIgnoreCase(idSearch)) {
 				bikeList.remove(b);
 				System.out.println("Bike deleted");
+				del = true;
 				break;
 			}
+		}
+		if(del == false) {
+			System.out.println("Deletion cancelled!");
 		}
 	}
 	//===================================  BIKE PART CRUD (STUDENT 3)  =======================================================================================
@@ -238,7 +242,7 @@ public class BikersPortal {
 		System.out.println("5. Search bike part listing");
 	}
 	
-	public static BikePart addBikePart() {
+	public static void addBikePart(ArrayList<BikePart>bikePartList) {
 		 String id = Helper.readString("Enter Id > ");
 		 String name = Helper.readString("Enter name > ");
 		 double price = Helper.readDouble("Enter price > ");
@@ -246,14 +250,9 @@ public class BikersPortal {
 		 String partType = Helper.readString("Enter part type > ");
 		 
 		 BikePart newBikePart = new BikePart(id, name, price,partType);
-		 return newBikePart;
-		 }
-		 public static void addBikePart(ArrayList<BikePart>bikePartList, BikePart newBikePart) {
-
 		 bikePartList.add(newBikePart);
 		 System.out.println("New bike part was successfully added!");
-		 
-		}
+		 }
 		// Read Bike Part
 		 public static void viewBikeParts(ArrayList<BikePart>bikePartList) {
 		 System.out.println("BIKE PART LISTING");
@@ -333,6 +332,9 @@ public class BikersPortal {
 
 	//===================================  APPOINTMENT CRUD (STUDENT 4)  =======================================================================================
 		  private void appointmentMenu() {
+			Helper.line(80, "=");
+			System.out.println("APPOINTMENT");
+			Helper.line(80, "=");
 		    System.out.println("1. View Appointments");
 		    System.out.println("2. Create Appointment");
 		    System.out.println("3. Update Appointment Information");
@@ -365,12 +367,17 @@ public class BikersPortal {
 		    } else if (option == 4) {
 		      // delete
 		      String id = Helper.readString("Enter a id");
+		      boolean del = false;
 		      for (int i = 0; i < appointmentList.size(); i++) {
 		        if (appointmentList.get(i).getAppID().equalsIgnoreCase(id)) {
 		          appointmentList.remove(i);
+		          System.out.println("Appointment deleted!");
+		          del = true;
 		          break;
 		        }
 
+		      } if(del == false) {
+		    	  System.out.println("Deletion cancelled!");
 		      }
 
 		    } else if (option == 5) {
@@ -405,6 +412,7 @@ public class BikersPortal {
 		    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		    LocalDate apptDateLD = LocalDate.parse(apptDate, dtf);
 		    appointmentList.add(new Appointment(id, apptDateLD));
+		    System.out.println("Appointment Created!");
 		  }
 
 		  // search appointment

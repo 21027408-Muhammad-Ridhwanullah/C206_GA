@@ -19,7 +19,7 @@ public class Bike extends Listing{
 	
 	public String getListing() {
 		String listing = super.showListing();
-		String output = String.format("%-55s %-15s %-15s", listing, colour, bikeType);
+		String output = String.format("%-55s %-10s %-20s\n", listing, colour, bikeType);
 		
 		return output;
 	}
