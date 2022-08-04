@@ -116,7 +116,66 @@ public class BikersPortalTest {
 
 	@Test
 	public void testViewBike() {
+		// Test if Item list is not null but empty - boundary
+		assertNotNull("Test if there is valid Bike arraylist to retrieve item from", bikeList);
 
+		// test if the list ofBike retrieved from the SourceCentre is empty - boundary
+		String allBike = BikersPortal.viewBike(bikeList);
+		String testOutput = "";
+		assertEquals("Test that the retrieved Bikelist is empty?", testOutput, allBike);
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// - normal
+		BikersPortal.addBike(bikeList, bi1);
+		BikersPortal.addBike(bikeList, bi2);
+		assertEquals("Test that Bike arraylist size is 2", 2, bikeList.size());
+
+		// test if the expected output string same as the list of Bike retrieved from
+		// the SourceCentre
+		allBike = BikersPortal.viewBike(bikeList);
+		testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
+				"COLOUR", "BIKE TYPE");
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B001", "bike1", 200.50, "red",
+				"Mountain Bike");
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B002", "bike2", 300.70, "black",
+				"Road Bike");
+		assertEquals("Test that ViewAllChromebooklist", testOutput, allBike);
+
+	}
+
+	@Test
+	public void testViewAppointment() {
+
+		// Item list is not null, so that we can add a new item
+		assertNotNull("Test if there is a valid Appointment arraylist to add to", appointmentList);
+
+		// Test if the list of Appointment retrieved from the AppMain is empty
+		assertEquals("Check that appointmentList is empty at the start", 0, appointmentList.size());
+
+		// Given an empty list, after adding 4 items, test if the size of the list is 4
+		BikersPortal.addAppointment(appointmentList, a1);
+		BikersPortal.addAppointment(appointmentList, a2);
+		BikersPortal.addAppointment(appointmentList, a3);
+		assertEquals("Test if that Appointment arraylist size is 4?", 4, appointmentList.size());
+	}
+
+	public void testAddAppointment() {
+		assertNotNull("check if appointment is valid to be added in the appointmentList", appointmentList);
+		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		// The item just added is as same as the first item of the list
+		BikersPortal.addAppointment(appointmentList, a1);
+		assertEquals("Check that Appointment arraylist size is 1", 1, appointmentList.size());
+		assertSame("Check that Appointment is added", a1, appointmentList.get(0));
+
+	}
+
+	public void testDeleteAppointment() {
+		assertNotNull("check if appointment is valid to be added in the appointmentList", appointmentList);
+		appointmentList.add(a1);
+		appointmentList.add(a2);
+		BikersPortal.delAppointment(appointmentList, a1);
+		// (normal) deleting a Appointment and check if the size of the list is 1;
+		assertEquals("Check that Appointment arraylist size is 1", 1, appointmentList.size());
 	}
 
 }

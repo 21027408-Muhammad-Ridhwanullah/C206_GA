@@ -66,7 +66,7 @@ public class BikersPortal {
 				bikeMenu();
 				subOption = Helper.readInt("Enter option > ");
 				if (subOption == 1) {
-					viewBike(bikeList);
+					System.out.println(viewBike(bikeList));
 				} else if (subOption == 2) {
 					addBike(bikeList, createBike());
 				} else if (subOption == 3) {
@@ -196,13 +196,13 @@ public class BikersPortal {
 		System.out.println("4. Edit bike listing");
 	}
 
-	public static void viewBike(ArrayList<Bike> bikeList) {
+	public static String viewBike(ArrayList<Bike> bikeList) {
 		String output = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
 				"COLOUR", "BIKE TYPE");
 		for (Bike b : bikeList) {
 			output += b.getListing();
 		}
-		System.out.println(output);
+		return output;
 	}
 
 	public static Bike createBike() {
@@ -282,43 +282,7 @@ public class BikersPortal {
 		System.out.println(output);
 	}
 
-	// Update Bike Part
-//		public static void updateBikePart(ArrayList<BikePart>bikePartList) {
-//		 String id = Helper.readString("Enter id to update >");
-//		 
-//		 boolean isFound= true;
-//		 for (int i = 0; i < bikePartList.size(); i++) {
-//		  if(bikePartList.get(i).getId().equals(id)) {
-//		   isFound = false;
-//		  }
-//		 }
-//		 if (isFound == false) {
-//		  String name = Helper.readString("Enter name to update > ");
-//		  double price = Helper.readDouble("Enter price to update > ");
-//		  char availability = Helper.readChar("Enter y/n > ");
-//		  String partType = Helper.readString("Enter part type > ");
-//		  
-//		  for(int i = 0; i < bikePartList.size();i++) {
-//		   if (bikePartList.get(i).getId().equals(id)) {
-//		    bikePartList.get(i).setName();
-//		    bikePartList.get(i).setPrice(price);
-//		    if (Character.toLowerCase(availability)=='y') {
-//		     bikePartList.get(i).setAvailable(true);
-//		    }
-//		    else {
-//		     if (Character.toLowerCase(availability)=='n') {
-//		      bikePartList.get(i).setAvailable(false);
-//		    }
-//		   }
-//		    System.out.println("Bike Part List has been updated!");
-//		  }
-//		   else {
-//		    System.out.println("ID entered is not found.");
-//		   }
-//		  }
-//		 }
-//		}
-	// Delete Bike Part
+	// Delete
 	public static void deleteBikePart(ArrayList<BikePart> bikePartList) {
 		String id = Helper.readString("Enter ID to delete bikepart > ");
 
