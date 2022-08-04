@@ -173,6 +173,7 @@ public class BikersPortalTest {
 
 	}
 
+	@Test
 	public void testAddAppointment() {
 		assertNotNull("check if appointment is valid to be added in the appointmentList", appointmentList);
 		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
@@ -181,8 +182,14 @@ public class BikersPortalTest {
 		assertEquals("Check that Appointment arraylist size is 1", 1, appointmentList.size());
 		assertSame("Check that Appointment is added", a1, appointmentList.get(0));
 
+		// (boundary) test if all elements are added or not.
+		BikersPortal.addAppointment(appointmentList, a2);
+		BikersPortal.addAppointment(appointmentList, a3);
+		assertEquals("Check that Appointment arraylist size is 3", 3, appointmentList.size());
+
 	}
 
+	@Test
 	public void testDeleteAppointment() {
 		assertNotNull("check if appointment is valid to be added in the appointmentList", appointmentList);
 		appointmentList.add(a1);
@@ -191,7 +198,7 @@ public class BikersPortalTest {
 		// (normal) deleting a Appointment and check if the size of the list is 1;
 		assertEquals("Check that Appointment arraylist size is 1", 1, appointmentList.size());
 
-		// (Boundary)
+		// (Boundary) deleting a2 and check if list size = 0
 		BikersPortal.delAppointment(appointmentList, a2);
 		assertEquals("Check that Appointment arraylist size is 0", 0, appointmentList.size());
 	}
@@ -204,9 +211,14 @@ public class BikersPortalTest {
 		// Test if the list of Bike Part retrieved from the AppMain is empty
 		assertEquals("Check that bikePartList is empty at the start", 0, bikePartList.size());
 
-		// Given an empty list, after adding 4 items, test if the size of the list is 4
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// (normal)
 		BikersPortal.addBikePart(bikePartList, bp1);
 		BikersPortal.addBikePart(bikePartList, bp2);
+		assertEquals("Test if that Bike arraylist size is 2?", 2, bikePartList.size());
+
+		// Given the list, after adding 3 items, test if the size of the list is 3
+		// (boundary)
 		BikersPortal.addBikePart(bikePartList, bp3);
 
 		assertEquals("Test if that Bike arraylist size is 3?", 3, bikePartList.size());
@@ -223,7 +235,7 @@ public class BikersPortalTest {
 		// The item added is same as the first item of the list
 		assertSame("Test that the Bike Part added is the same as the 1st item of the list?", bp1, bikePartList.get(0));
 
-		// Add another 2 items. test The size of the list is 3?
+		// Add another 2 items. test The size of the list is 3? (boundary)
 		// The last item added is the same as the last item of the list?
 		BikersPortal.addBikePart(bikePartList, bp2);
 		BikersPortal.addBikePart(bikePartList, bp3);
@@ -236,12 +248,21 @@ public class BikersPortalTest {
 		// Item list is not null, so that we can delete a new item
 		assertNotNull("Test if there is a valid Bike Part arraylist to delete from", bikePartList);
 
-		// After adding 1 item, test if the size of the list is 1
+		// (normal) - 3 elements in ArrayList, check if 1 of them deleted and the size
+		// is 2.
 		BikersPortal.addBikePart(bikePartList, bp1);
-		assertEquals("Test if that Bike Part arraylist size is 1?", 1, bikePartList.size());
+		BikersPortal.addBikePart(bikePartList, bp2);
+		BikersPortal.addBikePart(bikePartList, bp3);
 
-		// Delete the item, and test if the size of the list is 0
-		BikersPortal.deleteBikePart(bikePartList, bp1); // Requires user input (P001) in console
+		BikersPortal.deleteBikePart(bikePartList, bp1);
+
+		assertEquals("Test if that Bike Part arraylist size is 2?", 2, bikePartList.size());
+
+		// (normal)
+
+		// Delete the item, and test if the size of the list is 0(boundary)
+		BikersPortal.deleteBikePart(bikePartList, bp2);
+		BikersPortal.deleteBikePart(bikePartList, bp3);
 		assertEquals("Test if that Bike Part arraylist size is 0?", 0, bikePartList.size());
 	}
 
