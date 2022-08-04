@@ -36,30 +36,66 @@ public class BikersPortal {
 		    feedbackList.add(new Feedback());
 		    
 		int option = 0;
+		int subOption;
 		
 	while(option != 6) {
 		menu();
 		//Buyer
-		if(option == 1 ) {}
+		if(option == 1 ) {
+			buyerMenu();
+			subOption = Helper.readInt("Enter option > ");
+			if (subOption == 1) {
+				viewAllBuyers(buyerList);
+			} else if (subOption == 2) {
+				createnewbuyer(buyerList);
+			} else if (subOption == 3) {
+				deletebuyer(buyerList);
+			} else if (subOption == 4) {
+				System.out.println("***TBC***");
+			} else if (subOption == 5) {
+				System.out.println("***TBC***");
+			}
+			else {
+				System.out.println("Invalid Option");
+			}
+		}
 		//Bike
 		else if(option == 2) {
 			bikeMenu();
-			int subOption = Helper.readInt("Enter option > ");
+			subOption = Helper.readInt("Enter option > ");
 			if (subOption == 1) {
-				viewBike();
+				viewBike(bikeList);
 			} else if (subOption == 2) {
 				createBike();
 			} else if (subOption == 3) {
-				delBike();
+				delBike(bikeList);
 			} else if (subOption == 4) {
 				System.out.println("***TBC***");
-			} else {
+			} else if(subOption == 5) {
+				System.out.println("***TBC***");
+			}
+			else {
 				System.out.println("Invalid Option");
 			}
 		}
 		//Bike Part
 		else if(option == 3) {
-			
+			bikePMenu();
+			subOption = Helper.readInt("Enter option > ");
+			if (subOption == 1) {
+				viewBike(bikeList);
+			} else if (subOption == 2) {
+				addBikePart();
+			} else if (subOption == 3) {
+				deleteBikePart(bikePartList);
+			} else if (subOption == 4) {
+				System.out.println("***TBC***");
+			} else if(subOption == 5) {
+				System.out.println("***TBC***");
+			}
+			else {
+				System.out.println("Invalid Option");
+			}
 		}
 		//Appointment
 		else if(option == 4) {
@@ -93,9 +129,63 @@ public class BikersPortal {
 		System.out.println("5. Feedback");
 		System.out.println("6. Quit");
 	}
+//===================================  BUYER CRUD (STUDENT 1)  =======================================================================================
 	
-	//Student 1
-	//student 2
+	private void buyerMenu() {
+		Helper.line(80, "=");
+		System.out.println("BIKERS PORTAL");
+		Helper.line(80, "=");
+		
+		System.out.println("1. View all buyers");
+		System.out.println("2. Add buyer");
+		System.out.println("3. Delete buyer");
+		System.out.println("4. Update buyer");
+		System.out.println("5. Search buyer");
+	}
+	
+	private void createnewbuyer(ArrayList<Buyer> buyerList)  {
+		  String newname = Helper.readString("Enter buyer name: ");
+		  int mobileNum = Helper.readInt("Enter buyer's phone number: ");
+		  String buyerID = Helper.readString("Enter buyer's account ID: ");
+		  
+		  
+		  buyerList.add(new Buyer(buyerID, newname, mobileNum));
+		  System.out.println("Buyer is successfully registered");
+		 }
+		 
+		 private void deletebuyer(ArrayList<Buyer> buyerList) {
+		  boolean isFound = false;
+		  String deleteBuyer = Helper.readString("Enter Buyer's ID to delete: ");
+		  for(int e = 0; e < buyerList.size(); e++) {
+		   if(buyerList.get(e).getBuyerID().equals(deleteBuyer)) {
+		    isFound = true;
+		   }
+		  }
+		  if(isFound == true) {
+		   for(int e = 0; e < buyerList.size(); e++) {
+		    if(buyerList.get(e).getBuyerID().equals(deleteBuyer)) {
+		     buyerList.remove(e);
+		     System.out.println("User's account has been successfully deleted");
+		    }else{
+		     System.out.println("The deletion process has been cancelled");
+		    }
+		   }
+		  
+		  }
+		 }
+		 public static void viewAllBuyers(ArrayList<Buyer> buyerList) {
+		     System.out.println("BUYER's INFORMATION");
+		     String output = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
+
+		     for(int e = 0; e < buyerList.size(); e++) {
+
+		       output += String.format("%-10s %-10s %-10s\n", buyerList.get(e).getBuyerID(), buyerList.get(e).getBuyerName(), buyerList.get(e).getMobile());
+		     }
+		     System.out.println(output);
+		  }
+		 
+//===================================  BIKE CRUD (STUDENT 2)  =======================================================================================
+		 
 	private void bikeMenu() {
 		Helper.line(80, "=");
 		System.out.println("BIKE LISTING");
@@ -105,7 +195,7 @@ public class BikersPortal {
 		System.out.println("3. Delete bike listing");
 		System.out.println("4. Edit bike listing");
 	}
-	private void viewBike() {
+	private void viewBike(ArrayList <Bike>bikeList) {
 		String output = String.format("%-10s %-20s %-10s %-15s", "ID", "NAME", "PRICE", "AVAILABLE", "COLOUR",
 				"BIKE TYPE");
 		for (Bike b : bikeList) {
@@ -126,7 +216,7 @@ public class BikersPortal {
 		
 	}
 	
-	private void delBike() {
+	private void delBike(ArrayList<Bike> bikeList) {
 		String idSearch = Helper.readString("Enter id to delete > ");
 		for(Bike b: bikeList) {
 			if(b.getId().equalsIgnoreCase(idSearch)) {
@@ -136,6 +226,112 @@ public class BikersPortal {
 			}
 		}
 	}
+	//===================================  BIKE PART CRUD (STUDENT 3)  =======================================================================================
+	private void bikePMenu() {
+		Helper.line(80, "=");
+		System.out.println("BIKE PART LISTING");
+		Helper.line(80, "=");
+		System.out.println("1. View bike part listing");
+		System.out.println("2. Add bike part listing");
+		System.out.println("3. Delete bike part listing");
+		System.out.println("4. Edit bike part listing");
+		System.out.println("5. Search bike part listing");
+	}
+	
+	public static BikePart addBikePart() {
+		 String id = Helper.readString("Enter Id > ");
+		 String name = Helper.readString("Enter name > ");
+		 double price = Helper.readDouble("Enter price > ");
+		 char availability = Helper.readChar("Enter availability > ");
+		 String partType = Helper.readString("Enter part type > ");
+		 
+		 BikePart newBikePart = new BikePart(id, name, price,partType);
+		 return newBikePart;
+		 }
+		 public static void addBikePart(ArrayList<BikePart>bikePartList, BikePart newBikePart) {
+
+		 bikePartList.add(newBikePart);
+		 System.out.println("New bike part was successfully added!");
+		 
+		}
+		// Read Bike Part
+		 public static void viewBikeParts(ArrayList<BikePart>bikePartList) {
+		 System.out.println("BIKE PART LISTING");
+		 String output = String.format("%-5s %-30s %-10s %-15s %s\n", "ID","NAME","PRICE","AVAILABILITY","PART_TYPE");
+		 
+		 for (int i =0; i < bikePartList.size();i++) {
+		   output += String.format("%-5s %-30s %-10s %-15s %s\n", bikePartList.get(i).getId(), bikePartList.get(i).getName(),
+		     bikePartList.get(i).getPrice(), bikePartList.get(i).isAvailable(), bikePartList.get(i).getPartType());
+		}
+		 System.out.println(output);
+}
+
+		// Update Bike Part
+//		public static void updateBikePart(ArrayList<BikePart>bikePartList) {
+//		 String id = Helper.readString("Enter id to update >");
+//		 
+//		 boolean isFound= true;
+//		 for (int i = 0; i < bikePartList.size(); i++) {
+//		  if(bikePartList.get(i).getId().equals(id)) {
+//		   isFound = false;
+//		  }
+//		 }
+//		 if (isFound == false) {
+//		  String name = Helper.readString("Enter name to update > ");
+//		  double price = Helper.readDouble("Enter price to update > ");
+//		  char availability = Helper.readChar("Enter y/n > ");
+//		  String partType = Helper.readString("Enter part type > ");
+//		  
+//		  for(int i = 0; i < bikePartList.size();i++) {
+//		   if (bikePartList.get(i).getId().equals(id)) {
+//		    bikePartList.get(i).setName();
+//		    bikePartList.get(i).setPrice(price);
+//		    if (Character.toLowerCase(availability)=='y') {
+//		     bikePartList.get(i).setAvailable(true);
+//		    }
+//		    else {
+//		     if (Character.toLowerCase(availability)=='n') {
+//		      bikePartList.get(i).setAvailable(false);
+//		    }
+//		   }
+//		    System.out.println("Bike Part List has been updated!");
+//		  }
+//		   else {
+//		    System.out.println("ID entered is not found.");
+//		   }
+//		  }
+//		 }
+//		}
+		// Delete Bike Part
+		  public static void deleteBikePart(ArrayList<BikePart>bikePartList) {
+		   String id = Helper.readString("Enter ID to delete bikepart > ");
+		   
+		   boolean isFound = true;
+		   for (int i =0;i<bikePartList.size();i++) {
+		    if (bikePartList.get(i).getId().equals(id)){
+		     isFound = false;
+		    }
+		   }
+		   if (isFound == false) {
+		    for (int i = 0; i< bikePartList.size();i++) {
+		     if(bikePartList.get(i).getId().equals(id)) {
+		      char prompt = Helper.readChar("Delete record? Please input y/n");
+		      if(Character.toLowerCase(prompt) == 'y') {
+		       bikePartList.remove(i);
+		       System.out.println("Bike Part " + id + " has been successfully deleted.");
+		      }
+		      else {
+		       System.out.println("User has decided to not delete bike part list");
+		      }
+		     }
+		    }
+		   }
+		   else {
+		    System.out.println("Id entered was not found in the system");
+		   }
+		  }
+
+	//===================================  APPOINTMENT CRUD (STUDENT 4)  =======================================================================================
 		  private void appointmentMenu() {
 		    System.out.println("1. View Appointments");
 		    System.out.println("2. Create Appointment");

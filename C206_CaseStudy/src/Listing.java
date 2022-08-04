@@ -31,6 +31,10 @@ public class Listing {
 		return name;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public String showListing() {
 		String output = String.format("%-10s %-20s $%-10.2f %-15b", id, name, price, isAvailable);
 		return output;
