@@ -364,6 +364,7 @@ public class BikersPortal {
 	public static void viewAllAppointments(ArrayList<Appointment> appointmentList) {
 		System.out.println("Appointment");
 		String output = String.format("%-5s %s\n", "ID", "APPOINTMENT DATE");
+		//
 
 		for (int i = 0; i < appointmentList.size(); i++) {
 			output += String.format("%-5s %s\n", appointmentList.get(i).getAppID(),

@@ -121,25 +121,29 @@ public class BikersPortalTest {
 
 		// test if the list ofBike retrieved from the SourceCentre is empty - boundary
 		String allBike = BikersPortal.viewBike(bikeList);
-		String testOutput = "";
+		String testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
+				"COLOUR", "BIKE TYPE");
 		assertEquals("Test that the retrieved Bikelist is empty?", testOutput, allBike);
 
 		// Given an empty list, after adding 2 items, test if the size of the list is 2
 		// - normal
 		BikersPortal.addBike(bikeList, bi1);
 		BikersPortal.addBike(bikeList, bi2);
-		assertEquals("Test that Bike arraylist size is 2", 2, bikeList.size());
+		BikersPortal.addBike(bikeList, bi3);
+		assertEquals("Test that Bike arraylist size is 3", 3, bikeList.size());
 
 		// test if the expected output string same as the list of Bike retrieved from
 		// the SourceCentre
 		allBike = BikersPortal.viewBike(bikeList);
-		testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
+testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
 				"COLOUR", "BIKE TYPE");
-		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B001", "bike1", 200.50, "red",
+		
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B001", "bike1", 200.50, true, "red",
 				"Mountain Bike");
-		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B002", "bike2", 300.70, "black",
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B002", "bike2", 300.70, true, "black",
 				"Road Bike");
-		assertEquals("Test that ViewAllChromebooklist", testOutput, allBike);
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B003", "bike3", 150.67, true,  "white", "Folding Bike");
+		assertEquals("Test that VIewBike", testOutput, allBike);
 
 	}
 
@@ -156,7 +160,20 @@ public class BikersPortalTest {
 		BikersPortal.addAppointment(appointmentList, a1);
 		BikersPortal.addAppointment(appointmentList, a2);
 		BikersPortal.addAppointment(appointmentList, a3);
+		BikersPortal.addAppointment(appointmentList, a4);
+		
+		
 		assertEquals("Test if that Appointment arraylist size is 4?", 4, appointmentList.size());
+		
+		String expectoutput = String.format("%-5s %s\n", "ID", "APPOINTMENT DATE");
+		expectoutput += String.format("%-5s %s\n","A001", LocalDate.of(2022, 7, 10));
+		expectoutput += String.format("%-5s %s\n","A002", LocalDate.of(2022, 11, 11));
+		expectoutput += String.format("%-5s %s\n","A003", LocalDate.of(2022, 12, 12));
+		expectoutput += String.format("%-5s %s\n","A004", LocalDate.of(2023, 2, 8));
+		
+		
+		
+		
 	}
 
 	public void testAddAppointment() {
