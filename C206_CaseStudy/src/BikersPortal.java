@@ -194,17 +194,20 @@ public class BikersPortal {
 		System.out.println("User's account has been successfully deleted");
 	}
 
-	public static void viewAllBuyers(ArrayList<Buyer> buyerList) {
-		System.out.println("BUYER's INFORMATION");
-		String output = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
+	 public static String viewAllBuyers(ArrayList<Buyer> buyerList) {
+		  System.out.println("BUYER's INFORMATION");
+		  String output = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
 
-		for (int e = 0; e < buyerList.size(); e++) {
+		  for (int e = 0; e < buyerList.size(); e++) {
 
-			output += String.format("%-10s %-10s %-10s\n", buyerList.get(e).getBuyerID(),
-					buyerList.get(e).getBuyerName(), buyerList.get(e).getMobile());
-		}
-		System.out.println(output);
-	}
+		   output += String.format("%-10s %-10s %-10s\n", buyerList.get(e).getBuyerID(),
+		     buyerList.get(e).getBuyerName(), buyerList.get(e).getMobile());
+		   
+		  }
+		  return output;
+		  
+		  
+		 }
 
 //===================================  BIKE CRUD (STUDENT 2)  =======================================================================================
 
@@ -296,18 +299,19 @@ public class BikersPortal {
 	}
 
 	// Read Bike Part
-	public static void viewBikeParts(ArrayList<BikePart> bikePartList) {
-		System.out.println("BIKE PART LISTING");
-		String output = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY",
-				"PART_TYPE");
+	 public static String viewBikeParts(ArrayList<BikePart> bikePartList) {
+		  System.out.println("BIKE PART LISTING");
+		  String output = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY",
+		    "PART_TYPE");
 
-		for (int i = 0; i < bikePartList.size(); i++) {
-			output += String.format("%-5s %-30s %-10s %-15s %s\n", bikePartList.get(i).getId(),
-					bikePartList.get(i).getName(), bikePartList.get(i).getPrice(), bikePartList.get(i).isAvailable(),
-					bikePartList.get(i).getPartType());
-		}
-		System.out.println(output);
-	}
+		  for (int i = 0; i < bikePartList.size(); i++) {
+		   output += String.format("%-5s %-30s %-10s %-15s %s\n", bikePartList.get(i).getId(),
+		     bikePartList.get(i).getName(), bikePartList.get(i).getPrice(), bikePartList.get(i).isAvailable(),
+		     bikePartList.get(i).getPartType());
+		  }
+		  
+		  return output;
+		 }
 
 	// Delete
 	public static BikePart getDBikePart(ArrayList<BikePart> bikePartList) {

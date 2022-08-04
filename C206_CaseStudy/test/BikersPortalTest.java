@@ -204,26 +204,32 @@ public class BikersPortalTest {
 	}
 
 	@Test
-	public void testViewBikePart() {
-		// Item list is not null, so that we can add a new item
-		assertNotNull("Test if there is a valid Bike Part arraylist to add to", bikePartList);
+	 public void testViewBikePart() {
+	  // Test if Item list is not null but empty - boundary
+	  assertNotNull("Test if there is valid Bike part arraylist to retrieve item from", bikePartList);
 
-		// Test if the list of Bike Part retrieved from the AppMain is empty
-		assertEquals("Check that bikePartList is empty at the start", 0, bikePartList.size());
+	  // test if the list of Bike parts retrieved from the SourceCentre is empty - boundary
+	  String allBikeParts = BikersPortal.viewBikeParts(bikePartList);
+	  String testOutput = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY", "PART_TYPE");
+	  assertEquals("Test that the retrieved Bikelist is empty?", testOutput, allBikeParts);
 
-		// Given an empty list, after adding 2 items, test if the size of the list is 2
-		// (normal)
-		BikersPortal.addBikePart(bikePartList, bp1);
-		BikersPortal.addBikePart(bikePartList, bp2);
-		assertEquals("Test if that Bike arraylist size is 2?", 2, bikePartList.size());
+	  // Given an empty list, after adding 3 items, test if the size of the list is 3
+	  // - normal
+	  BikersPortal.addBikePart(bikePartList, bp1);
+	  BikersPortal.addBikePart(bikePartList, bp2);
+	  BikersPortal.addBikePart(bikePartList, bp3);
+	  assertEquals("Test that Bike part arraylist size is 3", 3, bikePartList.size());
 
-		// Given the list, after adding 3 items, test if the size of the list is 3
-		// (boundary)
-		BikersPortal.addBikePart(bikePartList, bp3);
+	  // test if the expected output string same as the list of Bike parts retrieved from
+	  // the SourceCentre
+	  allBikeParts = BikersPortal.viewBikeParts(bikePartList);
+	  testOutput = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY", "PART_TYPE");
+	  testOutput += String.format("%-5s %-30s %-10.1f %-15s %s\n", "BP001", "Cadex 65", 1000.0, true, "Bike Wheel");
+	  testOutput += String.format("%-5s %-30s %-10.1f %-15s %s\n", "BP002", "Polygon Xtrada 5 frame", 500.0, true, "Bike Frame");
+	  testOutput += String.format("%-5s %-30s %-10.1f %-15s %s\n", "BP003", "Wake", 80.0, true, "Bike handle bar");
 
-		assertEquals("Test if that Bike arraylist size is 3?", 3, bikePartList.size());
-	}
-
+	  assertEquals("Test that View Bike Part is shown", testOutput, allBikeParts);
+	 }
 	@Test
 	public void testAddBikePart() {
 		assertNotNull("Test if there is a valid Bike Part arraylist to add to", bikePartList);
@@ -267,19 +273,31 @@ public class BikersPortalTest {
 	}
 
 	@Test
-	public void testViewAllBuyer() {
-		// Item list is not null, so that we can add a new item
-		assertNotNull("Test if there is a valid Bike arraylist to add to", buyerList);
+	 public void testViewAllBuyer() {
+	  // Test if Item list is not null but empty - boundary
+	  assertNotNull("Test if there is valid Buyer arraylist to retrieve item from", buyerList);
 
-		// Test if the list of buyer retrieved from the BikersPortal is empty
-		assertEquals("Check that bikeList is empty at the start", 0, buyerList.size());
+	  // test if the list of Buyer is retrieved from the SourceCentre is empty - boundary
+	  String allBuyer = BikersPortal.viewAllBuyers(buyerList);
+	  String testOutput = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
+	  assertEquals("Test that the retrieved buyerlist is empty?", testOutput, allBuyer);
 
-		// Given an empty list, after adding 3 items, test if the size of the list is 3
-		BikersPortal.addBuyer(buyerList, b1);
-		BikersPortal.addBuyer(buyerList, b2);
-		BikersPortal.addBuyer(buyerList, b3);
-		assertEquals("Test if that Bike arraylist size is 3?", 3, buyerList.size());
-	}
+	  // Given an empty list, after adding 3 items, test if the size of the list is 3
+	  // - normal
+	  BikersPortal.addBuyer(buyerList, b1);
+	  BikersPortal.addBuyer(buyerList, b2);
+	  BikersPortal.addBuyer(buyerList, b3);
+	  assertEquals("Test that Bike arraylist size is 3", 3, buyerList.size());
+
+	  // test if the expected output string same as the list of Buyer retrieved from
+	  // the SourceCentre
+	  allBuyer = BikersPortal.viewAllBuyers(buyerList);
+	  testOutput = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
+	  testOutput += String.format("%-10s %-10s %-10d\n", "B001", "Mary", 83214567);
+	  testOutput += String.format("%-10s %-10s %-10d\n", "B002", "John", 98765432);
+	  testOutput += String.format("%-10s %-10s %-10d\n", "B003", "Timmy", 83214567);
+	  assertEquals("Test that view all buyer is shown", testOutput, allBuyer);
+	 }
 
 	@Test
 	public void testDeleteBuyer() {
