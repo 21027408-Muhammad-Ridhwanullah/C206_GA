@@ -149,7 +149,7 @@ testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME"
 
 	@Test
 	public void testViewAppointment() {
-
+//
 		// Item list is not null, so that we can add a new item
 		assertNotNull("Test if there is a valid Appointment arraylist to add to", appointmentList);
 

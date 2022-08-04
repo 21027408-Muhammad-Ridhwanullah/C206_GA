@@ -38,78 +38,97 @@ public class BikersPortal {
 		feedbackList.add(new Feedback());
 
 		int option = 0;
-		int subOption;
+		int subOption = 0;
 
 		while (option != 6) {
 			menu();
 			option = Helper.readInt("Enter option > ");
 			// Buyer
 			if (option == 1) {
-				buyerMenu();
-				subOption = Helper.readInt("Enter option > ");
-				if (subOption == 1) {
-					viewAllBuyers(buyerList);
-				} else if (subOption == 2) {
-					createnewbuyer(buyerList);
-				} else if (subOption == 3) {
-					deletebuyer(buyerList);
-				} else if (subOption == 4) {
-					System.out.println("***TBC***");
-				} else if (subOption == 5) {
-					System.out.println("***TBC***");
-				} else {
-					System.out.println("Invalid Option");
+				while (subOption != 4) {
+					buyerMenu();
+					subOption = Helper.readInt("Enter option > ");
+					if (subOption == 1) {
+						viewAllBuyers(buyerList);
+					} else if (subOption == 2) {
+						createnewbuyer(buyerList);
+					} else if (subOption == 3) {
+						deletebuyer(buyerList);
+					} else if (subOption == 4) {
+						break;
+					} else {
+						System.out.println("Invalid Option");
+					}
 				}
 			}
 			// Bike
 			else if (option == 2) {
-				bikeMenu();
-				subOption = Helper.readInt("Enter option > ");
-				if (subOption == 1) {
-					System.out.println(viewBike(bikeList));
-				} else if (subOption == 2) {
-					addBike(bikeList, createBike());
-				} else if (subOption == 3) {
-					gdelBike(bikeList);
-					delBike(bikeList, gdelBike(bikeList));
-				} else if (subOption == 4) {
-					System.out.println("***TBC***");
-				} else if (subOption == 5) {
-					System.out.println("***TBC***");
-				} else {
-					System.out.println("Invalid Option");
+				while (subOption != 4) {
+					bikeMenu();
+					subOption = Helper.readInt("Enter option > ");
+					if (subOption == 1) {
+						System.out.println(viewBike(bikeList));
+					} else if (subOption == 2) {
+						addBike(bikeList, createBike());
+					} else if (subOption == 3) {
+						gdelBike(bikeList);
+						delBike(bikeList, gdelBike(bikeList));
+					} else if (subOption == 4) {
+						break;
+					} else {
+						System.out.println("Invalid Option");
+					}
 				}
 			}
 			// Bike Part
 			else if (option == 3) {
-				bikePMenu();
-				subOption = Helper.readInt("Enter option > ");
-				if (subOption == 1) {
-					viewBikeParts(bikePartList);
-				} else if (subOption == 2) {
-					addBikePart(bikePartList);
-				} else if (subOption == 3) {
-					deleteBikePart(bikePartList);
-				} else if (subOption == 4) {
-					System.out.println("***TBC***");
-				} else if (subOption == 5) {
-					System.out.println("***TBC***");
-				} else {
-					System.out.println("Invalid Option");
+				while (subOption != 4) {
+					bikePMenu();
+					subOption = Helper.readInt("Enter option > ");
+					if (subOption == 1) {
+						viewBikeParts(bikePartList);
+					} else if (subOption == 2) {
+						addBikePart(bikePartList);
+					} else if (subOption == 3) {
+						deleteBikePart(bikePartList);
+					} else if (subOption == 4) {
+						break;
+					} else {
+						System.out.println("Invalid Option");
+					}
 				}
 			}
 			// Appointment
 			else if (option == 4) {
-				appointmentMenu();
-				appointment(appointmentList);
-			}
-			// Feedback
-			else if (option == 5) {
 
+				while (subOption != 4) {
+					appointmentMenu();
+					subOption = Helper.readInt("Enter an option > ");
+
+					if (subOption == 1) {
+						// View
+						viewAllAppointments(appointmentList);
+
+					} else if (subOption == 2) {
+						// add
+						addAppointment(appointmentList, createAppointment(appointmentList));
+
+					} else if (subOption == 3) {
+						// delete
+						delAppointment(appointmentList, delAppointment(appointmentList));
+
+					} else if (subOption == 4) {
+						break;
+					} else {
+						System.out.println("Invalid input.");
+					}
+				}
 			}
+
 			// Quit
-			else if (option == 6) {
+			else if (option == 5) {
 				System.out.println("Thank you for using Bikers Portal!");
+				break;
 			}
 			// Invalid
 			else {
@@ -127,8 +146,7 @@ public class BikersPortal {
 		System.out.println("2. Bike");
 		System.out.println("3. Bike Parts");
 		System.out.println("4. Appointment");
-		System.out.println("5. Feedback");
-		System.out.println("6. Quit");
+		System.out.println("5. Quit");
 	}
 //===================================  BUYER CRUD (STUDENT 1)  =======================================================================================
 
@@ -140,8 +158,7 @@ public class BikersPortal {
 		System.out.println("1. View all buyers");
 		System.out.println("2. Add buyer");
 		System.out.println("3. Delete buyer");
-		System.out.println("4. Update buyer");
-		System.out.println("5. Search buyer");
+		System.out.println("4. Quit");
 	}
 
 	public void createnewbuyer(ArrayList<Buyer> buyerList) {
@@ -193,7 +210,7 @@ public class BikersPortal {
 		System.out.println("1. View bike listing");
 		System.out.println("2. Add bike listing");
 		System.out.println("3. Delete bike listing");
-		System.out.println("4. Edit bike listing");
+		System.out.println("4. Quit");
 	}
 
 	public static String viewBike(ArrayList<Bike> bikeList) {
@@ -252,8 +269,7 @@ public class BikersPortal {
 		System.out.println("1. View bike part listing");
 		System.out.println("2. Add bike part listing");
 		System.out.println("3. Delete bike part listing");
-		System.out.println("4. Edit bike part listing");
-		System.out.println("5. Search bike part listing");
+		System.out.println("Quit");
 	}
 
 	public static void addBikePart(ArrayList<BikePart> bikePartList) {
@@ -317,47 +333,8 @@ public class BikersPortal {
 		Helper.line(80, "=");
 		System.out.println("1. View Appointments");
 		System.out.println("2. Create Appointment");
-		System.out.println("3. Update Appointment Information");
-		System.out.println("4. Delete Appointment");
-		System.out.println("5. Search Appointment by Date");
-		System.out.println("6. Search Appointment by Buyer's ID");
-	}
-
-	public void appointment(ArrayList<Appointment> appointmentList) {
-		int option = Helper.readInt("Enter an option > ");
-
-		if (option == 1) {
-			// View
-			viewAllAppointments(appointmentList);
-
-		} else if (option == 2) {
-			// add
-			addAppointment(appointmentList, createAppointment(appointmentList));
-
-		} else if (option == 3) {
-			// update
-			String id = Helper.readString("Enter a id");
-			for (Appointment i : appointmentList) {
-				if (i.getAppID().equalsIgnoreCase(id)) {
-					LocalDate date = Helper.readLocalDate("Enter a date");
-					i.setAppDate(date);
-					break;
-				}
-			}
-		} else if (option == 4) {
-			// delete
-			delAppointment(appointmentList, delAppointment(appointmentList));
-
-		} else if (option == 5) {
-			// search
-			searchAppointmentByDate(appointmentList);
-
-		} else if (option == 6) {
-			// update
-			searchAppointmentByID(appointmentList);
-		} else {
-			System.out.println("Invalid input.");
-		}
+		System.out.println("3. Delete Appointment");
+		System.out.println("4. Quit");
 	}
 
 	// view appointment
