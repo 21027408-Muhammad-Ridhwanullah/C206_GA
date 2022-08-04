@@ -135,14 +135,15 @@ public class BikersPortalTest {
 		// test if the expected output string same as the list of Bike retrieved from
 		// the SourceCentre
 		allBike = BikersPortal.viewBike(bikeList);
-testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
+		testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME", "PRICE", "AVAILABLE",
 				"COLOUR", "BIKE TYPE");
-		
+
 		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B001", "bike1", 200.50, true, "red",
 				"Mountain Bike");
 		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B002", "bike2", 300.70, true, "black",
 				"Road Bike");
-		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B003", "bike3", 150.67, true,  "white", "Folding Bike");
+		testOutput += String.format("%-10s %-20s $%-10.2f %-15b %-10s %-20s\n", "B003", "bike3", 150.67, true, "white",
+				"Folding Bike");
 		assertEquals("Test that VIewBike", testOutput, allBike);
 
 	}
@@ -161,19 +162,15 @@ testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME"
 		BikersPortal.addAppointment(appointmentList, a2);
 		BikersPortal.addAppointment(appointmentList, a3);
 		BikersPortal.addAppointment(appointmentList, a4);
-		
-		
+
 		assertEquals("Test if that Appointment arraylist size is 4?", 4, appointmentList.size());
-		
+
 		String expectoutput = String.format("%-5s %s\n", "ID", "APPOINTMENT DATE");
-		expectoutput += String.format("%-5s %s\n","A001", LocalDate.of(2022, 7, 10));
-		expectoutput += String.format("%-5s %s\n","A002", LocalDate.of(2022, 11, 11));
-		expectoutput += String.format("%-5s %s\n","A003", LocalDate.of(2022, 12, 12));
-		expectoutput += String.format("%-5s %s\n","A004", LocalDate.of(2023, 2, 8));
-		
-		
-		
-		
+		expectoutput += String.format("%-5s %s\n", "A001", LocalDate.of(2022, 7, 10));
+		expectoutput += String.format("%-5s %s\n", "A002", LocalDate.of(2022, 11, 11));
+		expectoutput += String.format("%-5s %s\n", "A003", LocalDate.of(2022, 12, 12));
+		expectoutput += String.format("%-5s %s\n", "A004", LocalDate.of(2023, 2, 8));
+
 	}
 
 	public void testAddAppointment() {
@@ -193,6 +190,104 @@ testOutput = String.format("%-10s %-20s %-10s %-15s %-10s %-20s\n", "ID", "NAME"
 		BikersPortal.delAppointment(appointmentList, a1);
 		// (normal) deleting a Appointment and check if the size of the list is 1;
 		assertEquals("Check that Appointment arraylist size is 1", 1, appointmentList.size());
+
+		// (Boundary)
+		BikersPortal.delAppointment(appointmentList, a2);
+		assertEquals("Check that Appointment arraylist size is 0", 0, appointmentList.size());
 	}
 
+	@Test
+	public void testViewBikePart() {
+		// Item list is not null, so that we can add a new item
+		assertNotNull("Test if there is a valid Bike Part arraylist to add to", bikePartList);
+
+		// Test if the list of Bike Part retrieved from the AppMain is empty
+		assertEquals("Check that bikePartList is empty at the start", 0, bikePartList.size());
+
+		// Given an empty list, after adding 4 items, test if the size of the list is 4
+		BikersPortal.addBikePart(bikePartList, bp1);
+		BikersPortal.addBikePart(bikePartList, bp2);
+		BikersPortal.addBikePart(bikePartList, bp3);
+
+		assertEquals("Test if that Bike arraylist size is 3?", 3, bikePartList.size());
+	}
+
+	@Test
+	public void testAddBikePart() {
+		assertNotNull("Test if there is a valid Bike Part arraylist to add to", bikePartList);
+
+		// Adding 1 item, should increase the size of the list to 1
+		BikersPortal.addBikePart(bikePartList, bp1);
+		assertEquals("Test if that Bike Part arraylist size is 1?", 1, bikePartList.size());
+
+		// The item added is same as the first item of the list
+		assertSame("Test that the Bike Part added is the same as the 1st item of the list?", bp1, bikePartList.get(0));
+
+		// Add another 2 items. test The size of the list is 3?
+		// The last item added is the same as the last item of the list?
+		BikersPortal.addBikePart(bikePartList, bp2);
+		BikersPortal.addBikePart(bikePartList, bp3);
+		assertEquals("Test that Bike Part arraylist size is 3?", 3, bikePartList.size());
+		assertSame("Test that the Bike Part last added is the same as 3rd item of the list?", bp3, bikePartList.get(2));
+	}
+
+	@Test
+	public void testDeleteBikePart() {
+		// Item list is not null, so that we can delete a new item
+		assertNotNull("Test if there is a valid Bike Part arraylist to delete from", bikePartList);
+
+		// After adding 1 item, test if the size of the list is 1
+		BikersPortal.addBikePart(bikePartList, bp1);
+		assertEquals("Test if that Bike Part arraylist size is 1?", 1, bikePartList.size());
+
+		// Delete the item, and test if the size of the list is 0
+		BikersPortal.deleteBikePart(bikePartList, bp1); // Requires user input (P001) in console
+		assertEquals("Test if that Bike Part arraylist size is 0?", 0, bikePartList.size());
+	}
+
+	@Test
+	public void testViewAllBuyer() {
+		// Item list is not null, so that we can add a new item
+		assertNotNull("Test if there is a valid Bike arraylist to add to", buyerList);
+
+		// Test if the list of buyer retrieved from the BikersPortal is empty
+		assertEquals("Check that bikeList is empty at the start", 0, buyerList.size());
+
+		// Given an empty list, after adding 3 items, test if the size of the list is 3
+		BikersPortal.addBuyer(buyerList, b1);
+		BikersPortal.addBuyer(buyerList, b2);
+		BikersPortal.addBuyer(buyerList, b3);
+		assertEquals("Test if that Bike arraylist size is 3?", 3, buyerList.size());
+	}
+
+	@Test
+	public void testDeleteBuyer() {
+		// Item list is not null, so that we can delete a new item
+		assertNotNull("Test if there is a valid Bike arraylist to delete from", buyerList);
+
+		// After adding 1 item, test if the size of the list is 1
+		BikersPortal.addBuyer(buyerList, b1);
+		assertEquals("Test if that Bike arraylist size is 1?", 1, buyerList.size());
+
+		// Delete the item, and test if the size of the list is 0
+		BikersPortal.deletebuyer(buyerList, b1); // Requires user input in console
+		assertEquals("Test if that Bike arraylist size is 0?", 0, buyerList.size());
+	}
+
+	@Test
+	public void testAddBuyer() {
+// Item list is not null, so that can add a new Buyer to listing - boundary
+		assertNotNull("Check if there is valid Bike arraylist to add to", buyerList);
+// Given an empty list, after adding 1 Buyer listing, the size of the list is 1 -
+// normal
+// The item just added is as same as the first Buyer to listing of the list
+		BikersPortal.addBuyer(buyerList, b1);
+		assertEquals("Check that Bike arraylist size is 1", 1, buyerList.size());
+
+// Add another Buyer to listing. test The size of the list is 2? -normal
+// The Buyer to listing just added is as same as the second item of the list
+		BikersPortal.addBuyer(buyerList, b2);
+		assertEquals("Check that Buyer arraylist size is 2", 2, buyerList.size());
+		assertSame("Check that Buyer is added", b2, buyerList.get(1));
+	}
 }

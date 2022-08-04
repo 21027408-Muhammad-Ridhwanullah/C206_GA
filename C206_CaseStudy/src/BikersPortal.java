@@ -53,7 +53,7 @@ public class BikersPortal {
 					} else if (subOption == 2) {
 						createnewbuyer(buyerList);
 					} else if (subOption == 3) {
-						deletebuyer(buyerList);
+						deletebuyer(buyerList, getDbuyer(buyerList));
 					} else if (subOption == 4) {
 						break;
 					} else {
@@ -71,7 +71,6 @@ public class BikersPortal {
 					} else if (subOption == 2) {
 						addBike(bikeList, createBike());
 					} else if (subOption == 3) {
-						gdelBike(bikeList);
 						delBike(bikeList, gdelBike(bikeList));
 					} else if (subOption == 4) {
 						break;
@@ -90,7 +89,7 @@ public class BikersPortal {
 					} else if (subOption == 2) {
 						addBikePart(bikePartList);
 					} else if (subOption == 3) {
-						deleteBikePart(bikePartList);
+						deleteBikePart(bikePartList, getDBikePart(bikePartList));
 					} else if (subOption == 4) {
 						break;
 					} else {
@@ -161,32 +160,38 @@ public class BikersPortal {
 		System.out.println("4. Quit");
 	}
 
-	public void createnewbuyer(ArrayList<Buyer> buyerList) {
+	public static Buyer createnewbuyer(ArrayList<Buyer> buyerList) {
 		String newname = Helper.readString("Enter buyer name: ");
 		int mobileNum = Helper.readInt("Enter buyer's phone number: ");
 		String buyerID = Helper.readString("Enter buyer's account ID: ");
 
-		buyerList.add(new Buyer(buyerID, newname, mobileNum));
-		System.out.println("Buyer is successfully registered");
+		Buyer buyernew = new Buyer(buyerID, newname, mobileNum);
+		return buyernew;
 	}
 
-	public void deletebuyer(ArrayList<Buyer> buyerList) {
+	public static void addBuyer(ArrayList<Buyer> buyerList, Buyer buyernew) {
+		buyerList.add(buyernew);
+		System.out.println("New buyer added.");
+	}
+
+	public static Buyer getDbuyer(ArrayList<Buyer> buyerList) {
 		boolean isFound = false;
 		String deleteBuyer = Helper.readString("Enter Buyer's ID to delete: ");
+		Buyer buy = null;
 		for (int e = 0; e < buyerList.size(); e++) {
 			if (buyerList.get(e).getBuyerID().equals(deleteBuyer)) {
 				isFound = true;
-			}
-		}
-		if (isFound == true) {
-			for (int e = 0; e < buyerList.size(); e++) {
-				if (buyerList.get(e).getBuyerID().equals(deleteBuyer)) {
-					buyerList.remove(e);
-					System.out.println("User's account has been successfully deleted");
-				}
+				buy = buyerList.get(e);
+				break;
 			}
 
 		}
+		return buy;
+	}
+
+	public static void deletebuyer(ArrayList<Buyer> buyerList, Buyer buy) {
+		buyerList.remove(buy);
+		System.out.println("User's account has been successfully deleted");
 	}
 
 	public static void viewAllBuyers(ArrayList<Buyer> buyerList) {
@@ -272,7 +277,7 @@ public class BikersPortal {
 		System.out.println("Quit");
 	}
 
-	public static void addBikePart(ArrayList<BikePart> bikePartList) {
+	public static BikePart addBikePart(ArrayList<BikePart> bikePartList) {
 		String id = Helper.readString("Enter Id > ");
 		String name = Helper.readString("Enter name > ");
 		double price = Helper.readDouble("Enter price > ");
@@ -280,6 +285,12 @@ public class BikersPortal {
 		String partType = Helper.readString("Enter part type > ");
 
 		BikePart newBikePart = new BikePart(id, name, price, partType);
+		bikePartList.add(newBikePart);
+		return newBikePart;
+
+	}
+
+	public static void addBikePart(ArrayList<BikePart> bikePartList, BikePart newBikePart) {
 		bikePartList.add(newBikePart);
 		System.out.println("New bike part was successfully added!");
 	}
@@ -299,30 +310,25 @@ public class BikersPortal {
 	}
 
 	// Delete
-	public static void deleteBikePart(ArrayList<BikePart> bikePartList) {
+	public static BikePart getDBikePart(ArrayList<BikePart> bikePartList) {
 		String id = Helper.readString("Enter ID to delete bikepart > ");
-
-		boolean isFound = true;
+		BikePart bp = null;
+		boolean isFound = false;
 		for (int i = 0; i < bikePartList.size(); i++) {
 			if (bikePartList.get(i).getId().equals(id)) {
-				isFound = false;
+				bp = bikePartList.get(i);
+				isFound = true;
 			}
 		}
 		if (isFound == false) {
-			for (int i = 0; i < bikePartList.size(); i++) {
-				if (bikePartList.get(i).getId().equals(id)) {
-					char prompt = Helper.readChar("Delete record? Please input y/n");
-					if (Character.toLowerCase(prompt) == 'y') {
-						bikePartList.remove(i);
-						System.out.println("Bike Part " + id + " has been successfully deleted.");
-					} else {
-						System.out.println("User has decided to not delete bike part list");
-					}
-				}
-			}
-		} else {
-			System.out.println("Id entered was not found in the system");
+			System.out.println("Deletion cancelled");
 		}
+		return bp;
+	}
+
+	public static void deleteBikePart(ArrayList<BikePart> bikePartList, BikePart bp) {
+		bikePartList.remove(bp);
+		System.out.println("Bike Part " + bp.getId() + " has been successfully deleted.");
 	}
 
 	// =================================== APPOINTMENT CRUD (STUDENT 4)
