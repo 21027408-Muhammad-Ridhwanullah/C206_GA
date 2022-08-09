@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Appointment {
 	private String appID;
 	private LocalDate appDate;
-	
+
 	public Appointment(String appID, LocalDate appDate) {
 		this.appID = appID;
 		this.appDate = appDate;
@@ -20,7 +20,5 @@ public class Appointment {
 	public String getAppID() {
 		return appID;
 	}
-	
-	
 
 }

@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 public class BikersPortal {
 
+	private static final int DELETE = 3;
+	private static final int ADD = 2;
+	private static final int VIEW = 1;
+	private static final int QUIT = 4;
+	private static final int APPOINTMENT = QUIT;
+	private static final int BIKEPART = DELETE;
+	private static final int BIKE = ADD;
+	private static final int BUYER = 1;
+	private static final int QUIT_MAIN = 5;
+	private static final int DECLARATION_N = 0;
 	private ArrayList<Buyer> buyerList = new ArrayList<Buyer>();
 	private ArrayList<Bike> bikeList = new ArrayList<Bike>();
 	private ArrayList<BikePart> bikePartList = new ArrayList<BikePart>();
 	private ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
-	private ArrayList<Feedback> feedbackList = new ArrayList<Feedback>();
 
 	public static void main(String[] args) {
 		BikersPortal bp = new BikersPortal();
@@ -35,26 +44,24 @@ public class BikersPortal {
 		appointmentList.add(new Appointment("A003", LocalDate.of(2022, 12, 12)));
 		appointmentList.add(new Appointment("A004", LocalDate.of(2023, 2, 8)));
 
-		feedbackList.add(new Feedback());
+		int option = DECLARATION_N;
+		int subOption = DECLARATION_N;
 
-		int option = 0;
-		int subOption = 0;
-
-		while (option != 6) {
+		while (option != QUIT_MAIN) {
 			menu();
 			option = Helper.readInt("Enter option > ");
 			// Buyer
-			if (option == 1) {
-				while (subOption != 4) {
+			if (option == BUYER) {
+				while (subOption != QUIT) {
 					buyerMenu();
 					subOption = Helper.readInt("Enter option > ");
-					if (subOption == 1) {
+					if (subOption == VIEW) {
 						viewAllBuyers(buyerList);
-					} else if (subOption == 2) {
+					} else if (subOption == ADD) {
 						createnewbuyer(buyerList);
-					} else if (subOption == 3) {
+					} else if (subOption == DELETE) {
 						deletebuyer(buyerList, getDbuyer(buyerList));
-					} else if (subOption == 4) {
+					} else if (subOption == QUIT) {
 						break;
 					} else {
 						System.out.println("Invalid Option");
@@ -62,17 +69,17 @@ public class BikersPortal {
 				}
 			}
 			// Bike
-			else if (option == 2) {
-				while (subOption != 4) {
+			else if (option == BIKE) {
+				while (subOption != QUIT) {
 					bikeMenu();
 					subOption = Helper.readInt("Enter option > ");
-					if (subOption == 1) {
+					if (subOption == VIEW) {
 						System.out.println(viewBike(bikeList));
-					} else if (subOption == 2) {
+					} else if (subOption == ADD) {
 						addBike(bikeList, createBike());
-					} else if (subOption == 3) {
+					} else if (subOption == DELETE) {
 						delBike(bikeList, gdelBike(bikeList));
-					} else if (subOption == 4) {
+					} else if (subOption == QUIT) {
 						break;
 					} else {
 						System.out.println("Invalid Option");
@@ -80,17 +87,17 @@ public class BikersPortal {
 				}
 			}
 			// Bike Part
-			else if (option == 3) {
-				while (subOption != 4) {
+			else if (option == BIKEPART) {
+				while (subOption != QUIT) {
 					bikePMenu();
 					subOption = Helper.readInt("Enter option > ");
-					if (subOption == 1) {
+					if (subOption == VIEW) {
 						viewBikeParts(bikePartList);
-					} else if (subOption == 2) {
+					} else if (subOption == ADD) {
 						addBikePart(bikePartList);
-					} else if (subOption == 3) {
+					} else if (subOption == DELETE) {
 						deleteBikePart(bikePartList, getDBikePart(bikePartList));
-					} else if (subOption == 4) {
+					} else if (subOption == QUIT) {
 						break;
 					} else {
 						System.out.println("Invalid Option");
@@ -98,25 +105,25 @@ public class BikersPortal {
 				}
 			}
 			// Appointment
-			else if (option == 4) {
+			else if (option == APPOINTMENT) {
 
-				while (subOption != 4) {
+				while (subOption != QUIT) {
 					appointmentMenu();
 					subOption = Helper.readInt("Enter an option > ");
 
-					if (subOption == 1) {
+					if (subOption == VIEW) {
 						// View
 						viewAllAppointments(appointmentList);
 
-					} else if (subOption == 2) {
+					} else if (subOption == ADD) {
 						// add
 						addAppointment(appointmentList, createAppointment(appointmentList));
 
-					} else if (subOption == 3) {
+					} else if (subOption == DELETE) {
 						// delete
 						delAppointment(appointmentList, delAppointment(appointmentList));
 
-					} else if (subOption == 4) {
+					} else if (subOption == QUIT) {
 						break;
 					} else {
 						System.out.println("Invalid input.");
@@ -125,7 +132,7 @@ public class BikersPortal {
 			}
 
 			// Quit
-			else if (option == 5) {
+			else if (option == QUIT_MAIN) {
 				System.out.println("Thank you for using Bikers Portal!");
 				break;
 			}
@@ -194,20 +201,18 @@ public class BikersPortal {
 		System.out.println("User's account has been successfully deleted");
 	}
 
-	 public static String viewAllBuyers(ArrayList<Buyer> buyerList) {
-		  System.out.println("BUYER's INFORMATION");
-		  String output = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
+	public static String viewAllBuyers(ArrayList<Buyer> buyerList) {
+		System.out.println("BUYER's INFORMATION");
+		String output = String.format("%-10s %-10s %-10s\n", "ID", "NAME", "MOBILE NUMBER");
 
-		  for (int e = 0; e < buyerList.size(); e++) {
+		for (int e = 0; e < buyerList.size(); e++) {
 
-		   output += String.format("%-10s %-10s %-10s\n", buyerList.get(e).getBuyerID(),
-		     buyerList.get(e).getBuyerName(), buyerList.get(e).getMobile());
-		   
-		  }
-		  return output;
-		  
-		  
-		 }
+			output += buyerList.get(e).viewBuyer();
+
+		}
+		return output;
+
+	}
 
 //===================================  BIKE CRUD (STUDENT 2)  =======================================================================================
 
@@ -299,19 +304,17 @@ public class BikersPortal {
 	}
 
 	// Read Bike Part
-	 public static String viewBikeParts(ArrayList<BikePart> bikePartList) {
-		  System.out.println("BIKE PART LISTING");
-		  String output = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY",
-		    "PART_TYPE");
+	public static String viewBikeParts(ArrayList<BikePart> bikePartList) {
+		System.out.println("BIKE PART LISTING");
+		String output = String.format("%-5s %-30s %-10s %-15s %s\n", "ID", "NAME", "PRICE", "AVAILABILITY",
+				"PART_TYPE");
 
-		  for (int i = 0; i < bikePartList.size(); i++) {
-		   output += String.format("%-5s %-30s %-10s %-15s %s\n", bikePartList.get(i).getId(),
-		     bikePartList.get(i).getName(), bikePartList.get(i).getPrice(), bikePartList.get(i).isAvailable(),
-		     bikePartList.get(i).getPartType());
-		  }
-		  
-		  return output;
-		 }
+		for (int i = 0; i < bikePartList.size(); i++) {
+			output += bikePartList.get(i).getListing();
+		}
+
+		return output;
+	}
 
 	// Delete
 	public static BikePart getDBikePart(ArrayList<BikePart> bikePartList) {
@@ -354,8 +357,9 @@ public class BikersPortal {
 		//
 
 		for (int i = 0; i < appointmentList.size(); i++) {
-			output += String.format("%-5s %s\n", appointmentList.get(i).getAppID(),
-					appointmentList.get(i).getAppDate());
+			String appID = appointmentList.get(i).getAppID();
+			LocalDate appDate = appointmentList.get(i).getAppDate();
+			output += String.format("%-5s %s\n", appID, appDate);
 		}
 		System.out.println(output);
 	}

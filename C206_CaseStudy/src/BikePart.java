@@ -1,5 +1,5 @@
 
-public class BikePart extends Listing{
+public class BikePart extends Listing {
 
 	private String partType;
 
@@ -11,10 +11,10 @@ public class BikePart extends Listing{
 	public String getPartType() {
 		return partType;
 	}
-	
+
 	public String getListing() {
-		String listing = super.showListing();
-		String output = String.format("%-55s %-15s", listing, partType);
+		String output = String.format("%-5s %-30s %-10s %-15s %s\n", super.getId(), super.getName(), super.getPrice(),
+				super.isAvailable(), partType);
 		return output;
 	}
 }
